@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, SizeProduct
+from .models import Product, SizeProduct, Bill, Detail
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
@@ -18,3 +18,12 @@ class ImageAdmin(admin.ModelAdmin):
     inlines = [SizeInLine]
 
 admin.site.register(Product, ImageAdmin)
+
+class BillInLine(admin.StackedInline):
+    model = Detail
+    extra = 0
+
+class BillAdmin(admin.ModelAdmin):
+    inlines = [BillInLine]
+
+admin.site.register(Bill, BillAdmin)
